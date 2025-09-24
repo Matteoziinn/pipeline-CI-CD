@@ -19,9 +19,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build e Testes com Maven
-        run: mvn -B -f gerenciadortarefas/gerenciadortarefas/pom.xml verify
+      - name: Verificar estrutura de pastas
+        run: ls -R
 
+      - name: Build e Testes com Maven
+        run: mvn -B verify
+        working-directory: ./gerenciadortarefas/gerenciadortarefas
 
   build-and-push-docker:
     name: Construir e Publicar Imagem Docker
@@ -58,7 +61,7 @@ jobs:
     steps:
       - name: Deploy para ambiente de Staging
         run: |
-          echo "Deploy para Staging..." 
+          echo "Deploy para Staging..."
 
   deploy-production:
     name: Deploy em Produção
