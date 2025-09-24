@@ -24,7 +24,8 @@ jobs:
 
       - name: Build e Testes com Maven
         run: mvn -B verify
-        working-directory: ./gerenciadortarefas/gerenciadortarefas
+        working-directory: ./gerenciadortarefas
+
 
   build-and-push-docker:
     name: Construir e Publicar Imagem Docker
