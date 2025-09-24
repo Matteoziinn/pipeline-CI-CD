@@ -20,7 +20,8 @@ jobs:
           distribution: 'temurin'
 
       - name: Build e Testes com Maven
-        run: mvn -B verify
+        run: mvn -B -f gerenciadortarefas/gerenciadortarefas/pom.xml verify
+
 
   build-and-push-docker:
     name: Construir e Publicar Imagem Docker
