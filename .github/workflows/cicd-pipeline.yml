@@ -54,7 +54,7 @@ jobs:
       - name: Construir e enviar a imagem Docker
         run: |
           REPO=$(echo "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
-          docker build -t ghcr.io/$REPO:latest -t ghcr.io/$REPO:${GITHUB_SHA} .
+          docker build -t ghcr.io/$REPO:latest -t ghcr.io/$REPO:${GITHUB_SHA} ./gerenciadortarefas
           docker push ghcr.io/$REPO:latest
           docker push ghcr.io/$REPO:${GITHUB_SHA}
 
