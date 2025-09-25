@@ -28,7 +28,7 @@ jobs:
             ${{ runner.os }}-maven-
 
       - name: Build e Testes com Maven
-        run: mvn -B package --file pom.xml
+        run: mvn -B package --file gerenciadortarefas/pom.xml
 
   build-and-push-docker:
     name: Construir e Publicar Imagem Docker
