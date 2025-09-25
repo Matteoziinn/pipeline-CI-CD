@@ -101,7 +101,7 @@ curl -X DELETE http://localhost:8080/tarefas/1
 ## 👥 Membros do Projeto
 - Matteo Souza Caetano  
 - Matheus Borges  
-- Adson de Oliveira  
+- Adison de Oliveira  
 
 ---
 
