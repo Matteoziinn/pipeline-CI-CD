@@ -1,4 +1,4 @@
-FROM eclipse-temurin:17-jre
+FROM ghcr.io/adoptium/temurin17-jre:latest
 WORKDIR /app
 COPY target/*.jar app.jar
 EXPOSE 8080
