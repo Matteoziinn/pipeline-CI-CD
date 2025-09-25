@@ -52,13 +52,13 @@ jobs:
         run: echo "PROJECT_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)" >> $GITHUB_ENV
 
       - name: Construir e enviar a imagem Docker
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          push: true
-          tags: |
-            ghcr.io/${{ github.repository }}:latest
-            ghcr.io/${{ github.repository }}:${{ github.sha }}
+        run: |
+          REPO=$(echo "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
+          docker build -t ghcr.io/$REPO:latest -t ghcr.io/$REPO:${GITHUB_SHA} .
+          docker push ghcr.io/$REPO:latest
+          docker push ghcr.io/$REPO:${GITHUB_SHA}
+
+
 
   deploy-staging:
     name: Deploy em Homologação
