@@ -14,7 +14,7 @@ O objetivo é permitir o cadastro, listagem e organização de atividades de for
 - **Java 17+**  
 - **Spring Boot**  
 - **Maven**  
-- **Docker** (opcional, para containerização)  
+- **Docker**   
 
 ---
 
