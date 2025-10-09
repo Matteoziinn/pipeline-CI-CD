@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.empresa.gerenciadortarefas.model.Tarefa;
 import br.com.empresa.gerenciadortarefas.repository.TarefaRepository;
+import br.com.empresa.gerenciadortarefas.service.TaskService;
 
 import java.util.List;
 
@@ -15,10 +16,13 @@ public class TarefaController {
 
     @Autowired
     private TarefaRepository tarefaRepository;
+    
+    @Autowired
+    private TaskService taskService;
 
     @PostMapping
     public Tarefa criarTarefa(@RequestBody Tarefa tarefa) {
-        return tarefaRepository.save(tarefa);
+        return taskService.createTask(tarefa);
     }
 
     @GetMapping
