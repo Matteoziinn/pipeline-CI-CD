@@ -10,7 +10,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 import br.com.empresa.gerenciadortarefas.model.Tarefa;
 import br.com.empresa.gerenciadortarefas.repository.TarefaRepository;
 
@@ -25,37 +24,37 @@ class TaskControllerTest {
     private MockMvc mockMvc;
 
     @Autowired
-    private TarefaRepository taskRepository;
+    private TarefaRepository tarefaRepository;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     @BeforeEach
     void limparBanco() {
-        taskRepository.deleteAll();
+        tarefaRepository.deleteAll();
     }
 
     @Test
     void deveCriarTarefaComSucesso() throws Exception {
-        Tarefa novaTask = new Tarefa();
-        novaTask.setTitulo("Estudar Spring Boot");
+        Tarefa novaTarefa = new Tarefa();
+        novaTarefa.setTitulo("Estudar Spring Boot");
 
-        mockMvc.perform(post("/api/tasks")
+        mockMvc.perform(post("/api/tarefas") // 🔹 caminho ajustado
                 .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(novaTask)))
+                .content(objectMapper.writeValueAsString(novaTarefa)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Estudar Spring Boot"))
+                .andExpect(jsonPath("$.titulo").value("Estudar Spring Boot")) // 🔹 campo ajustado
                 .andExpect(jsonPath("$.id").exists());
     }
 
     @Test
     void deveListarTarefas() throws Exception {
-        Tarefa task = new Tarefa();
-        task.setTitulo("Tarefa de teste");
-        taskRepository.save(task);
+        Tarefa tarefa = new Tarefa();
+        tarefa.setTitulo("Tarefa de teste");
+        tarefaRepository.save(tarefa);
 
-        mockMvc.perform(get("/api/tasks"))
+        mockMvc.perform(get("/api/tarefas")) // 🔹 caminho ajustado
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].title").value("Tarefa de teste"));
+                .andExpect(jsonPath("$[0].titulo").value("Tarefa de teste")); // 🔹 campo ajustado
     }
 }

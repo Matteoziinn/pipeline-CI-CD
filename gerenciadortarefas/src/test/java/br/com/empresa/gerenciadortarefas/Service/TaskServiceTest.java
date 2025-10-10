@@ -1,5 +1,4 @@
-package br.com.empresa.gerenciadortarefas.Service;
-
+package br.com.empresa.gerenciadortarefas.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class TaskServiceTest {
 
     @Mock
-    private TarefaRepository taskRepository;
+    private TarefaRepository tarefaRepository;
 
     @InjectMocks
     private TaskService taskService;
@@ -30,29 +29,24 @@ class TaskServiceTest {
 
     @Test
     void deveCriarTarefaComSucesso() {
-        // Dado (Given)
-        Tarefa task = new Tarefa();
-        task.setTitulo("Nova Tarefa");
+        Tarefa tarefa = new Tarefa();
+        tarefa.setTitulo("Nova Tarefa");
 
-        when(taskRepository.save(any(Tarefa.class))).thenReturn(task);
+        when(tarefaRepository.save(any(Tarefa.class))).thenReturn(tarefa);
 
-        // Quando (When)
-        Tarefa resultado = taskService.createTask(task);
+        Tarefa resultado = taskService.createTask(tarefa);
 
-        // Então (Then)
         assertNotNull(resultado);
         assertEquals("Nova Tarefa", resultado.getTitulo());
-        verify(taskRepository, times(1)).save(task);
+        verify(tarefaRepository, times(1)).save(tarefa);
     }
 
     @Test
     void deveLancarExcecaoAoCriarTarefaComTituloVazio() {
-        // Dado
-        Tarefa task = new Tarefa();
-        task.setTitulo("");
+        Tarefa tarefa = new Tarefa();
+        tarefa.setTitulo("");
 
-        // Quando e Então
-        assertThrows(IllegalArgumentException.class, () -> taskService.createTask(task));
-        verify(taskRepository, never()).save(any(Tarefa.class));
+        assertThrows(IllegalArgumentException.class, () -> taskService.createTask(tarefa));
+        verify(tarefaRepository, never()).save(any(Tarefa.class));
     }
 }
